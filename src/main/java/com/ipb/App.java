@@ -1,6 +1,7 @@
 package com.ipb;
 
-import java.time.Duration;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +25,8 @@ import com.ipb.solver.TimeTableConstraintProvider;
 // https://github.com/kiegroup/optaplanner-quickstarts/blob/8.x/hello-world/src/main/java/org/acme/schooltimetabling/TimeTableApp.java
 
 public class App {
-    static Logger logger = new Logger();
-    static DemoData demoData = DemoData.SMALL;
+    static ILogger logger = new Logger();
+    static DemoData demoData = Constants.demoData;
     static long startTime, endTime;
 
     public static void main(String[] args) {
@@ -50,7 +51,7 @@ public class App {
                 .withConstraintProviderClass(TimeTableConstraintProvider.class)
                 // The solver runs only for 5 seconds on this small dataset.
                 // It's recommended to run for at least 5 minutes ("5m") otherwise.
-                .withTerminationSpentLimit(Duration.ofSeconds(5)));
+                .withTerminationSpentLimit(Constants.terminationSpentLimit));
         endTime = System.currentTimeMillis();
 
         logger.info("SolverFactory created in " + (endTime - startTime) + "ms");
@@ -62,9 +63,11 @@ public class App {
         printTimeTable(solution);
 
         logger.info("Solved in " + (endTime - startTime) + "ms");
+        logger.close();
     }
 
     public static void printTimeTable(TimeTable timeTable) {
+        ILogger logger = LoggerFile.fromConstants();
         logger.info("");
         List<Room> roomList = timeTable.getRoomList();
         List<Lesson> lessonList = timeTable.getLessonList();
@@ -126,11 +129,74 @@ public class App {
                                 + lesson.getStudentGroup());
             }
         }
+        logger.close();
     }
 }
 
-class Logger {
+interface ILogger {
+    void info(String message);
+
+    void close();
+}
+
+class Logger implements ILogger {
     public void info(String message) {
         System.out.println(message);
+    }
+
+    public void close() {
+    }
+}
+
+class LoggerFile implements ILogger {
+    private File file;
+    private FileWriter fileWriter;
+
+    static LoggerFile fromConstants() {
+        StringBuilder path = new StringBuilder();
+        path.append("reports/");
+        path.append(Constants.demoData.toString().toLowerCase());
+        path.append("_");
+        path.append(Constants.constraintsUsed.toString().toLowerCase());
+        path.append("_");
+        path.append(Constants.terminationSpentLimit.toString().toLowerCase());
+        path.append(".log");
+        return new LoggerFile(path.toString());
+    }
+
+    public LoggerFile(String path) {
+        this.file = new File(path);
+
+        if (this.file.exists()) {
+            this.file.delete();
+        }
+
+        try {
+            this.file.createNewFile();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            this.fileWriter = new FileWriter(this.file);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void info(String message) {
+        try {
+            this.fileWriter.write(message + "\n");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void close() {
+        try {
+            this.fileWriter.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

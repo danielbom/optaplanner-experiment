@@ -1,7 +1,10 @@
 package com.ipb.solver;
 
 import java.time.Duration;
+import java.util.LinkedList;
+import java.util.List;
 
+import com.ipb.Constants;
 import com.ipb.domain.Lesson;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.score.stream.Constraint;
@@ -13,16 +16,37 @@ public class TimeTableConstraintProvider implements ConstraintProvider {
 
     @Override
     public Constraint[] defineConstraints(ConstraintFactory constraintFactory) {
-        return new Constraint[] {
+        LinkedList<Constraint> constraints = List.of(
                 // Hard constraints
                 roomConflict(constraintFactory),
                 teacherConflict(constraintFactory),
-                studentGroupConflict(constraintFactory),
-                // Soft constraints
-                teacherRoomStability(constraintFactory),
-                teacherTimeEfficiency(constraintFactory),
-                studentGroupSubjectVariety(constraintFactory)
-        };
+                studentGroupConflict(constraintFactory)).stream()
+                .collect(LinkedList::new, LinkedList::add, LinkedList::addAll);
+
+        switch (Constants.constraintsUsed) {
+            case ONLY_HARD:
+                break;
+            case WITH_SOFT_1:
+                constraints.add(teacherRoomStability(constraintFactory));
+                break;
+            case WITH_SOFT_2:
+                constraints.add(teacherTimeEfficiency(constraintFactory));
+                break;
+            case WITH_SOFT_3:
+                constraints.add(studentGroupSubjectVariety(constraintFactory));
+                break;
+            case ALL:
+                constraints.add(teacherRoomStability(constraintFactory));
+                constraints.add(teacherTimeEfficiency(constraintFactory));
+                constraints.add(studentGroupSubjectVariety(constraintFactory));
+                break;
+            default:
+                break;
+        }
+
+        System.out.println("Constraints used: " + Constants.constraintsUsed + " (" + constraints.size() + ")");
+
+        return constraints.toArray(new Constraint[0]);
     }
 
     Constraint roomConflict(ConstraintFactory constraintFactory) {
@@ -100,5 +124,13 @@ public class TimeTableConstraintProvider implements ConstraintProvider {
                 })
                 .penalize(HardSoftScore.ONE_SOFT)
                 .asConstraint("Student group subject variety");
+    }
+
+    public enum ConstraintsUsed {
+        ONLY_HARD,
+        WITH_SOFT_1,
+        WITH_SOFT_2,
+        WITH_SOFT_3,
+        ALL
     }
 }

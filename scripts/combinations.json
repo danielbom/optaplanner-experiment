@@ -1,0 +1,5 @@
+{
+  "demoData": ["small", "large"],
+  "terminationSpentLimit": ["5s", "20s", "1m"],
+  "constraintsUsed": ["only_hard", "with_soft_1", "with_soft_2", "with_soft_3", "all"]
+}

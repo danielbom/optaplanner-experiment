@@ -1,1 +1,6 @@
 target/
+reports/
+
+# Python cache
+*.pyc
+__pycache__/

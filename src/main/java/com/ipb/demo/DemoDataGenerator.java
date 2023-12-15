@@ -98,9 +98,9 @@ public class DemoDataGenerator {
             lessonList.add(new Lesson("Drama", "I. Jones", "9th grade"));
             lessonList.add(new Lesson("Art", "S. Dali", "9th grade"));
             lessonList.add(new Lesson("Art", "S. Dali", "9th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "9th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "9th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "9th grade"));
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "9th grade")); // Physical Education
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "9th grade")); // Physical Education
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "9th grade")); // Physical Education
         }
 
         lessonList.add(new Lesson("Math", "A. Turing", "10th grade"));
@@ -126,9 +126,9 @@ public class DemoDataGenerator {
             lessonList.add(new Lesson("Drama", "I. Jones", "10th grade"));
             lessonList.add(new Lesson("Art", "S. Dali", "10th grade"));
             lessonList.add(new Lesson("Art", "S. Dali", "10th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "10th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "10th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "10th grade"));
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "10th grade")); // Physical Education
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "10th grade")); // Physical Education
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "10th grade")); // Physical Education
 
             lessonList.add(new Lesson("Math", "A. Turing", "11th grade"));
             lessonList.add(new Lesson("Math", "A. Turing", "11th grade"));
@@ -152,9 +152,9 @@ public class DemoDataGenerator {
             lessonList.add(new Lesson("Drama", "P. Cruz", "11th grade"));
             lessonList.add(new Lesson("Art", "S. Dali", "11th grade"));
             lessonList.add(new Lesson("Art", "S. Dali", "11th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "11th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "11th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "11th grade"));
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "11th grade")); // Physical Education
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "11th grade")); // Physical Education
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "11th grade")); // Physical Education
 
             lessonList.add(new Lesson("Math", "A. Turing", "12th grade"));
             lessonList.add(new Lesson("Math", "A. Turing", "12th grade"));
@@ -178,9 +178,9 @@ public class DemoDataGenerator {
             lessonList.add(new Lesson("Drama", "P. Cruz", "12th grade"));
             lessonList.add(new Lesson("Art", "S. Dali", "12th grade"));
             lessonList.add(new Lesson("Art", "S. Dali", "12th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "12th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "12th grade"));
-            lessonList.add(new Lesson("Physical education", "C. Lewis", "12th grade"));
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "12th grade")); // Physical Education
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "12th grade")); // Physical Education
+            lessonList.add(new Lesson("P.E.", "C. Lewis", "12th grade")); // Physical Education
         }
 
         Lesson lesson = lessonList.get(0);

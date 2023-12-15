@@ -1,0 +1,12 @@
+package com.ipb;
+
+import java.time.Duration;
+
+import com.ipb.demo.DemoDataGenerator.DemoData;
+import com.ipb.solver.TimeTableConstraintProvider.ConstraintsUsed;
+
+public class Constants {
+    public static final DemoData demoData = DemoData.{{demoData}};
+    public static final Duration terminationSpentLimit = {{terminationSpentLimit}};
+    public static final ConstraintsUsed constraintsUsed = ConstraintsUsed.{{constraintsUsed}};
+}
